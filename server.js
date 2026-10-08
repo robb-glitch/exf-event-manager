@@ -140,7 +140,7 @@ app.use((req, res, next) => { res.setHeader('X-Content-Type-Options', 'nosniff')
 app.get('/healthz', (req, res) => res.send('ok'));
 
 const jsonBig = express.json({ limit: '6mb' });
-const PUB = path.join(__dirname, 'public');
+const PUB = require('fs').existsSync(path.join(__dirname, 'public', 'app.html')) ? path.join(__dirname, 'public') : __dirname;
 const sendPage = (res, name) => { res.setHeader('Cache-Control', 'no-cache'); res.sendFile(path.join(PUB, name)); };
 
 /* ---- login ---- */
