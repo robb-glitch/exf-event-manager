@@ -1,0 +1,18 @@
+{
+  "name": "exf-event-manager",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ExF Event Manager and Partner Interest form, hosted on Railway",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.11.5",
+    "express-async-errors": "^3.1.1"
+  }
+}

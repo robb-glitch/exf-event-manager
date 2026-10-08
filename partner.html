@@ -1,0 +1,474 @@
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ExFreight Partner Interest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: split screen. Brand-navy statement panel left, working form right; stacks to a band + form on phones. */
+:root{
+  --navy:#141b4d; --navy-2:#1d2766; --red:#be2227; --red-lite:#ff6a6f; --blue:#2c3b95;
+  --bg:#f5f6fa; --surface:#ffffff; --fg:#1b1d2b; --muted:#5b6078; --line:#d9dce8; --field:#ffffff;
+  --link:#2c3b95; --btn:#be2227; --btn-fg:#ffffff; --err:#b3141b; --ok:#1d7a4d; --chip:#e7eaf7; --chip-fg:#1d2766;
+  --f-display:"Jost","Century Gothic","Avenir Next",Futura,sans-serif;
+  --f-body:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1020; --surface:#161a30; --fg:#eceef8; --muted:#a2a8c6; --line:#2b3157; --field:#1b2040;
+  --link:#a9b4ff; --btn:#d8363c; --err:#ff8a8f; --ok:#6fd3a0; --chip:#262d5c; --chip-fg:#dfe3ff; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1020; --surface:#161a30; --fg:#eceef8; --muted:#a2a8c6; --line:#2b3157; --field:#1b2040;
+  --link:#a9b4ff; --btn:#d8363c; --err:#ff8a8f; --ok:#6fd3a0; --chip:#262d5c; --chip-fg:#dfe3ff; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.5 var(--f-body);margin:0}
+.shell{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:100vh}
+.panel{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.panel-in{position:sticky;top:0;padding:clamp(24px,4vw,56px) clamp(20px,3.5vw,52px);display:flex;flex-direction:column;gap:clamp(28px,6vh,64px);min-height:min(100vh,860px)}
+.logo{width:min(250px,70%);height:auto;display:block}
+.mark{position:absolute;right:-18%;bottom:-6%;width:120%;opacity:.07;pointer-events:none}
+h1{font:800 clamp(2.5rem,5.2vw,4.5rem)/.94 var(--f-display);text-transform:uppercase;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--red-lite)}
+.lede{font-size:1.1rem;max-width:30ch;color:#d5d9f2;margin:18px 0 0}
+.facts{display:grid;gap:10px;margin:0;padding:0;list-style:none;font:500 .95rem var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:#c3c9ee;position:relative}
+.facts li{border-top:1px solid #ffffff2e;padding-top:10px}
+main{padding:clamp(24px,4vw,56px) clamp(16px,4vw,64px);display:flex;justify-content:center}
+form{width:100%;max-width:680px;display:flex;flex-direction:column;gap:40px}
+fieldset{border:0;padding:0;margin:0;min-width:0;display:grid;gap:18px}
+legend{padding:0;margin-bottom:6px;font:800 1.5rem/1.1 var(--f-display);text-transform:uppercase;letter-spacing:.01em;display:flex;align-items:baseline;gap:12px;width:100%}
+legend .n{font:600 .8rem var(--f-mono);color:var(--red);letter-spacing:.08em}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) legend .n{color:var(--red-lite)}}
+:root[data-theme="dark"] legend .n{color:var(--red-lite)}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media(max-width:560px){.row{grid-template-columns:minmax(0,1fr)}}
+label,.lbl{display:grid;gap:6px;font:600 .82rem var(--f-display);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);min-width:0}
+label .req,.lbl .req{color:var(--red)}
+input[type=text],input[type=email],input[type=tel],input[type=url],select,textarea{
+  font:400 1rem var(--f-body);letter-spacing:0;text-transform:none;color:var(--fg);background:var(--field);
+  border:1.5px solid var(--line);border-radius:3px;padding:11px 12px;width:100%;min-width:0}
+textarea{min-height:104px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,.opt:focus-visible{outline:3px solid var(--blue);outline-offset:1px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :focus-visible{outline-color:#a9b4ff}}
+:root[data-theme="dark"] :focus-visible{outline-color:#a9b4ff}
+.err{font:500 .85rem var(--f-body);color:var(--err);text-transform:none;letter-spacing:0;min-height:0}
+[aria-invalid=true]{border-color:var(--err)!important}
+.hint{font:400 .85rem var(--f-body);text-transform:none;letter-spacing:0;color:var(--muted)}
+/* country multiselect */
+.ms{position:relative}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--chip);color:var(--chip-fg);border-radius:3px;padding:4px 6px 4px 9px;font:500 .85rem var(--f-body)}
+.chip b{font:600 .72rem var(--f-mono);letter-spacing:.04em;opacity:.8}
+.chip button{all:unset;cursor:pointer;width:20px;height:20px;display:grid;place-items:center;border-radius:2px;font-size:1rem;line-height:1}
+.chip button:hover{background:#0002}
+.chip button:focus-visible{outline:2px solid var(--blue)}
+.list{position:absolute;z-index:5;left:0;right:0;top:calc(100% - 0px);max-height:260px;overflow:auto;background:var(--surface);border:1.5px solid var(--line);border-radius:3px;box-shadow:0 10px 30px #0003;margin-top:4px}
+.opt{display:flex;justify-content:space-between;gap:12px;padding:9px 12px;cursor:pointer;font-size:.97rem}
+.opt:hover,.opt.hl{background:var(--chip)}
+.opt code{font:600 .78rem var(--f-mono);color:var(--muted)}
+.opt[aria-selected=true]{font-weight:600}
+.opt[aria-selected=true] code::before{content:"✓ ";color:var(--ok)}
+.none{padding:12px;color:var(--muted)}
+.count{font:500 .85rem var(--f-mono);color:var(--muted);text-transform:none;letter-spacing:0}
+/* modes matrix */
+.mx{display:grid;grid-template-columns:minmax(60px,.7fr) repeat(2,minmax(0,1fr));gap:8px;align-items:stretch}
+.mx .h{font:600 .78rem var(--f-display);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:0 2px 2px}
+.mx .m{font:800 1.6rem/1 var(--f-display);display:flex;align-items:center}
+.pills{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.yn{display:grid;grid-template-columns:repeat(2,minmax(0,140px));gap:8px}
+.tog{position:relative;display:block}
+.tog input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;width:100%;height:100%}
+.tog span{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border:1.5px solid var(--line);border-radius:3px;background:var(--field);font:600 .85rem var(--f-display);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);transition:background .12s,color .12s,border-color .12s}
+.tog input:checked+span{background:var(--blue);border-color:var(--blue);color:#fff}
+.tog input:checked+span::before{content:"✓"}
+.tog input:focus-visible+span{outline:3px solid var(--blue);outline-offset:2px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tog input:checked+span{background:#4a5bd6;border-color:#4a5bd6}}
+:root[data-theme="dark"] .tog input:checked+span{background:#4a5bd6;border-color:#4a5bd6}
+.card-up{display:grid;gap:8px;justify-items:start;padding:14px;border:1.5px dashed var(--line);border-radius:3px;background:var(--field)}
+.cardprev{display:flex;gap:12px;align-items:center}
+.cardprev img{max-width:160px;max-height:100px;border:1.5px solid var(--line);border-radius:3px}
+label.demo{display:flex;align-items:flex-start;gap:14px;padding:16px;border:1.5px solid var(--line);border-radius:3px;background:var(--field);cursor:pointer;text-transform:none;letter-spacing:0;color:var(--fg)}
+label.demo input{width:24px;height:24px;margin:2px 0 0;flex:none;accent-color:var(--red)}
+label.demo b{font:800 1.1rem var(--f-display);text-transform:uppercase;letter-spacing:.04em;display:block}
+label.demo small{font:400 .88rem var(--f-body);color:var(--muted);display:block;margin-top:2px}
+.actions{display:flex;flex-direction:column;gap:12px}
+button.go{font:800 1.1rem var(--f-display);letter-spacing:.08em;text-transform:uppercase;background:var(--btn);color:var(--btn-fg);border:0;border-radius:3px;padding:16px 22px;cursor:pointer;width:100%}
+button.go:hover{filter:brightness(1.08)}
+button.go[disabled]{opacity:.6;cursor:wait}
+.fine{font-size:.85rem;color:var(--muted);margin:0}
+.done{display:grid;gap:18px;max-width:680px;width:100%;align-self:flex-start}
+.done h2{font:800 clamp(2rem,4vw,3rem)/1 var(--f-display);text-transform:uppercase;margin:0}
+.done h2 em{font-style:normal;color:var(--ok)}
+.sum{font:400 .85rem/1.5 var(--f-mono);white-space:pre-wrap;background:var(--field);border:1.5px solid var(--line);border-radius:3px;padding:14px;min-height:150px;width:100%;color:var(--fg)}
+.btn2{font:700 .9rem var(--f-display);letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--link);border:1.5px solid currentColor;border-radius:3px;padding:11px 16px;cursor:pointer;justify-self:start}
+@media(max-width:860px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .panel-in{position:static;min-height:0;gap:22px;padding-block:28px 32px}
+  .mark{width:160%;right:-40%;bottom:-30%}
+  .lede{max-width:44ch}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="shell">
+  <aside class="panel">
+    <svg class="mark" viewBox="90 85 420 270" aria-hidden="true"><path fill="#fff" d="M323.1,264.2c43-31.4,92.1-53.5,140-80.9,6.4,20.9,2,33.7-13.4,41.8-35,18.5-83.7,46-138.6,74.8,0,0-3.9-24.1,12-35.7ZM339.9,307.2c-12.7,7.6-19,19.2-13.6,36.6,24.8-13,47.7-25.2,70.7-37,15.5-8,21.3-19.5,13.6-39.2-24.2,13.4-47.8,25.8-70.7,39.6ZM494.6,100.5c-60.8,34.3-118.4,66.3-175.5,99.5-15.5,9-18.6,24.9-14.7,45,60.9-32.7,120.3-64.2,179.3-96.5,18.4-10.1,11.5-27.9,10.9-48ZM277.6,264.2c-43-31.4-92.1-53.5-140-80.9-6.4,20.9-2,33.7,13.4,41.8,35,18.5,83.7,46,138.6,74.8,0,0,3.9-24.1-12-35.7ZM190.1,267.6c-7.8,19.7-2,31.2,13.6,39.2,23,11.8,45.9,24,70.7,37,5.4-17.4-.9-29-13.6-36.6-22.9-13.7-46.5-26.1-70.7-39.6ZM112.7,148.5c59,32.3,118.4,63.8,179.3,96.5,3.9-20.2.7-36.1-14.7-45-57-33.2-114.7-65.2-175.5-99.5-.6,20.1-7.5,37.9,10.9,48Z"/></svg>
+    <div class="panel-in">
+      <img class="logo" alt="ExFreight, Global Digital Forwarding" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMTIwMCA0NTAiPgogIDwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyOS4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiAyLjEuMCBCdWlsZCAxODYpICAtLT4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLnN0MCB7CiAgICAgICAgZmlsbDogI2ZmZjsKICAgICAgfQoKICAgICAgLnN0MSB7CiAgICAgICAgY2xpcC1wYXRoOiB1cmwoI2NsaXBwYXRoKTsKICAgICAgfQogICAgPC9zdHlsZT4KICAgIDxjbGlwUGF0aCBpZD0iY2xpcHBhdGgiPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzIzLjEsMjY0LjJjNDMtMzEuNCw5Mi4xLTUzLjUsMTQwLTgwLjksNi40LDIwLjksMiwzMy43LTEzLjQsNDEuOC0zNSwxOC41LTgzLjcsNDYtMTM4LjYsNzQuOCwwLDAtMy45LTI0LjEsMTItMzUuN1pNMzM5LjksMzA3LjJjLTEyLjcsNy42LTE5LDE5LjItMTMuNiwzNi42LDI0LjgtMTMsNDcuNy0yNS4yLDcwLjctMzcsMTUuNS04LDIxLjMtMTkuNSwxMy42LTM5LjItMjQuMiwxMy40LTQ3LjgsMjUuOC03MC43LDM5LjZaTTQ5NC42LDEwMC41Yy02MC44LDM0LjMtMTE4LjQsNjYuMy0xNzUuNSw5OS41LTE1LjUsOS0xOC42LDI0LjktMTQuNyw0NSw2MC45LTMyLjcsMTIwLjMtNjQuMiwxNzkuMy05Ni41LDE4LjQtMTAuMSwxMS41LTI3LjksMTAuOS00OFpNMjc3LjYsMjY0LjJjLTQzLTMxLjQtOTIuMS01My41LTE0MC04MC45LTYuNCwyMC45LTIsMzMuNywxMy40LDQxLjgsMzUsMTguNSw4My43LDQ2LDEzOC42LDc0LjgsMCwwLDMuOS0yNC4xLTEyLTM1LjdaTTE5MC4xLDI2Ny42Yy03LjgsMTkuNy0yLDMxLjIsMTMuNiwzOS4yLDIzLDExLjgsNDUuOSwyNCw3MC43LDM3LDUuNC0xNy40LS45LTI5LTEzLjYtMzYuNi0yMi45LTEzLjctNDYuNS0yNi4xLTcwLjctMzkuNlpNMTEyLjcsMTQ4LjVjNTksMzIuMywxMTguNCw2My44LDE3OS4zLDk2LjUsMy45LTIwLjIuNy0zNi4xLTE0LjctNDUtNTctMzMuMi0xMTQuNy02NS4yLTE3NS41LTk5LjUtLjYsMjAuMS03LjUsMzcuOSwxMC45LDQ4WiIvPgogICAgPC9jbGlwUGF0aD4KICA8L2RlZnM+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzIzLjEsMjY0LjJjNDMtMzEuNCw5Mi4xLTUzLjUsMTQwLTgwLjksNi40LDIwLjksMiwzMy43LTEzLjQsNDEuOC0zNSwxOC41LTgzLjcsNDYtMTM4LjYsNzQuOCwwLDAtMy45LTI0LjEsMTItMzUuN1pNMzM5LjksMzA3LjJjLTEyLjcsNy42LTE5LDE5LjItMTMuNiwzNi42LDI0LjgtMTMsNDcuNy0yNS4yLDcwLjctMzcsMTUuNS04LDIxLjMtMTkuNSwxMy42LTM5LjItMjQuMiwxMy40LTQ3LjgsMjUuOC03MC43LDM5LjZaTTQ5NC42LDEwMC41Yy02MC44LDM0LjMtMTE4LjQsNjYuMy0xNzUuNSw5OS41LTE1LjUsOS0xOC42LDI0LjktMTQuNyw0NSw2MC45LTMyLjcsMTIwLjMtNjQuMiwxNzkuMy05Ni41LDE4LjQtMTAuMSwxMS41LTI3LjksMTAuOS00OFpNMjc3LjYsMjY0LjJjLTQzLTMxLjQtOTIuMS01My41LTE0MC04MC45LTYuNCwyMC45LTIsMzMuNywxMy40LDQxLjgsMzUsMTguNSw4My43LDQ2LDEzOC42LDc0LjgsMCwwLDMuOS0yNC4xLTEyLTM1LjdaTTE5MC4xLDI2Ny42Yy03LjgsMTkuNy0yLDMxLjIsMTMuNiwzOS4yLDIzLDExLjgsNDUuOSwyNCw3MC43LDM3LDUuNC0xNy40LS45LTI5LTEzLjYtMzYuNi0yMi45LTEzLjctNDYuNS0yNi4xLTcwLjctMzkuNlpNMTEyLjcsMTQ4LjVjNTksMzIuMywxMTguNCw2My44LDE3OS4zLDk2LjUsMy45LTIwLjIuNy0zNi4xLTE0LjctNDUtNTctMzMuMi0xMTQuNy02NS4yLTE3NS41LTk5LjUtLjYsMjAuMS03LjUsMzcuOSwxMC45LDQ4WiIvPgogICAgPGcgY2xhc3M9InN0MSI+CiAgICAgIDxyZWN0IGNsYXNzPSJzdDAiIHg9IjkxLjIiIHk9Ijg4LjQiIHdpZHRoPSI0MTQuOSIgaGVpZ2h0PSIyNjIuNSIvPgogICAgPC9nPgogIDwvZz4KICA8Zz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTA3LjIsMTY5aDUxLjV2MTcuNmgtMzMuNnYxN2gzMy42djE3LjJoLTMzLjZ2MjQuOGgzMy42djE3LjZoLTUxLjV2LTk0LjNaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik01NzMuNCwxOTMuNWgyMC4zbDEzLjgsMTksMTMuNy0xOWgyMGwtMjMuNywzMi44LDI2LjgsMzYuOWgtMjAuM2wtMTYuNi0yMi45LTE2LjUsMjIuOWgtMjBsMjYuNS0zNi43LTI0LTMzWiIvPgogICAgPC9nPgogICAgPGc+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02NDguOCwxNjloNDYuOHYxNy41aC0yOXYxNy4xaDI5djE3LjJoLTI5djQyLjRoLTE3Ljh2LTk0LjNaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03MTEuNywxOTMuNWgxNXY4LjhjMS42LTMuNSwzLjgtNi4xLDYuNS03LjksMi43LTEuOCw1LjYtMi43LDguOC0yLjdzNC42LjYsNy4xLDEuOGwtNS40LDE1LjFjLTIuMS0xLTMuNy0xLjUtNS4xLTEuNS0yLjcsMC01LDEuNy02LjgsNXMtMi44LDkuOS0yLjgsMTkuNnYzLjRjMCwwLDAsMjguMiwwLDI4LjJoLTE3LjR2LTY5LjdaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik04MzMuOCwyMzMuNGgtNTYuMmMuOCw1LDMsOC45LDYuNSwxMS44LDMuNSwyLjksOCw0LjQsMTMuNSw0LjRzMTIuMi0yLjMsMTYuOS02LjlsMTQuNyw2LjljLTMuNyw1LjItOC4xLDkuMS0xMy4yLDExLjZzLTExLjIsMy43LTE4LjMsMy43Yy0xMC45LDAtMTkuOC0zLjQtMjYuNy0xMC40LTYuOS02LjktMTAuMy0xNS41LTEwLjMtMjUuOXMzLjQtMTkuNSwxMC4zLTI2LjVjNi45LTcsMTUuNS0xMC41LDI1LjgtMTAuNXMxOS45LDMuNSwyNi44LDEwLjVjNi45LDcsMTAuMywxNi4zLDEwLjMsMjcuOHYzLjNaTTgxNi4zLDIxOS43Yy0xLjItMy45LTMuNC03LTYuOC05LjUtMy40LTIuNC03LjMtMy43LTExLjgtMy43cy05LjIsMS40LTEyLjgsNC4xYy0yLjMsMS43LTQuNSw0LjctNi40LDloMzcuOVoiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTg2MC45LDE2NC44YzMuMSwwLDUuNywxLjEsNy45LDMuMywyLjIsMi4yLDMuMyw0LjksMy4zLDguMXMtMS4xLDUuOC0zLjMsOGMtMi4yLDIuMi00LjgsMy4zLTcuOCwzLjNzLTUuOC0xLjEtOC0zLjRjLTIuMi0yLjItMy4zLTUtMy4zLTguMnMxLjEtNS43LDMuMy03LjljMi4yLTIuMiw0LjgtMy4zLDcuOS0zLjNaTTg1Mi4yLDE5My41aDE3LjV2NjkuN2gtMTcuNXYtNjkuN1oiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTk0My4zLDE5My41aDE3LjR2NTkuN2MwLDExLjgtMi40LDIwLjUtNy4xLDI2LTYuNCw3LjUtMTYsMTEuMy0yOC44LDExLjNzLTEyLjYtLjktMTcuMi0yLjZjLTQuNy0xLjctOC42LTQuMi0xMS44LTcuNS0zLjItMy4zLTUuNi03LjMtNy4xLTEyLjFoMTkuM2MxLjcsMiwzLjksMy40LDYuNiw0LjUsMi43LDEsNS45LDEuNSw5LjUsMS41czguNS0uNywxMS4zLTIuMmMyLjktMS41LDQuOS0zLjMsNi4xLTUuNiwxLjItMi4zLDEuOC02LjMsMS44LTExLjktMy4xLDMuMS02LjMsNS4zLTkuNyw2LjYtMy40LDEuMy03LjIsMi0xMS41LDItOS40LDAtMTcuMy0zLjQtMjMuNy0xMC4xLTYuNS02LjgtOS43LTE1LjMtOS43LTI1LjZzMy40LTIwLDEwLjMtMjYuN2M2LjItNi4xLDEzLjYtOS4xLDIyLjItOS4xczcuOC43LDExLjQsMi4yYzMuNiwxLjUsNy4xLDMuOSwxMC43LDcuM3YtNy43Wk05MjUuMSwyMDguMWMtNS41LDAtMTAuMSwxLjgtMTMuNyw1LjUtMy42LDMuNy01LjQsOC4zLTUuNCwxMy45czEuOCwxMC42LDUuNSwxNC4zYzMuNywzLjcsOC4zLDUuNiwxMy44LDUuNnM5LjktMS44LDEzLjQtNS40YzMuNS0zLjYsNS4zLTguNCw1LjMtMTQuM3MtMS44LTEwLjUtNS4zLTE0LjJjLTMuNS0zLjYtOC4xLTUuNC0xMy43LTUuNFoiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTk4NC42LDE2Ni42aDE3LjR2MzRjMy40LTIuOSw2LjktNS4yLDEwLjMtNi42LDMuNS0xLjUsNy0yLjIsMTAuNS0yLjIsNi45LDAsMTIuOCwyLjQsMTcuNSw3LjIsNC4xLDQuMSw2LjEsMTAuMiw2LjEsMTguM3Y0Ni4xaC0xNy4ydi0zMC42YzAtOC4xLS40LTEzLjUtMS4yLTE2LjQtLjgtMi45LTIuMS01LTMuOS02LjQtMS45LTEuNC00LjItMi4xLTYuOS0yLjFzLTYuNiwxLjItOS4xLDMuNWMtMi41LDIuNC00LjMsNS42LTUuMyw5LjYtLjUsMi4xLS44LDYuOS0uOCwxNC40djI4aC0xNy40di05Ni42WiIvPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTA3MS42LDE2Ny44aDE3LjV2MjUuN2gxMC40djE1LjFoLTEwLjR2NTQuN2gtMTcuNXYtNTQuN2gtOXYtMTUuMWg5di0yNS43WiIvPgogICAgPC9nPgogICAgPGc+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik01MzkuNiwzMDUuMmwtNC42LDQuNmMtMi45LTMuMS02LjMtNC42LTEwLjItNC42cy02LjIsMS4xLTguNSwzLjQtMy40LDUtMy40LDguMiwxLjIsNi4xLDMuNiw4LjRjMi40LDIuMyw1LjMsMy41LDguOCwzLjVzNC4yLS41LDUuNy0xLjRjMS42LS45LDIuOC0yLjQsMy44LTQuNWgtOS45di02LjFoMTcuM3YxLjRjMCwzLS43LDUuOS0yLjMsOC41LTEuNiwyLjctMy42LDQuNy02LDYuMnMtNS40LDIuMS04LjcsMi4xLTYuNy0uOC05LjUtMi4zYy0yLjgtMS41LTUtMy44LTYuNi02LjYtMS42LTIuOS0yLjQtNi0yLjQtOS4zczEuNS04LjUsNC41LTExLjljMy42LTQsOC4yLTYsMTMuOS02czUuOC42LDguNCwxLjdjMi4yLjksNC4zLDIuNSw2LjQsNC44WiIvPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTQ3LjEsMjk4LjdoNi40djM1LjJoLTYuNHYtMzUuMloiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTU3MS43LDMwNy44YzIuNCwwLDQuNi42LDYuOCwxLjgsMi4xLDEuMiwzLjgsMi44LDQuOSw0LjksMS4yLDIuMSwxLjgsNC4zLDEuOCw2LjdzLS42LDQuNi0xLjgsNi43Yy0xLjIsMi4xLTIuOCwzLjctNC45LDQuOS0yLjEsMS4yLTQuMywxLjgtNi44LDEuOC0zLjYsMC02LjgtMS4zLTkuMy0zLjktMi42LTIuNi0zLjktNS43LTMuOS05LjRzMS41LTcuMyw0LjQtOS45YzIuNi0yLjMsNS41LTMuNSw4LjgtMy41Wk01NzEuOCwzMTMuOGMtMiwwLTMuNi43LTQuOSwyLjFzLTIsMy4xLTIsNS4zLjcsNCwyLDUuNGMxLjMsMS40LDMsMi4xLDQuOSwyLjFzMy43LS43LDUtMi4xYzEuMy0xLjQsMi0zLjIsMi01LjNzLS43LTMuOS0yLTUuM2MtMS4zLTEuNC0zLTItNS0yWiIvPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTk3LjEsMjk4Ljd2MTIuNmMxLjItMS4yLDIuNC0yLDMuNy0yLjYsMS4zLS42LDIuOC0uOSw0LjMtLjksMy4zLDAsNi4xLDEuMyw4LjUsMy44LDIuMywyLjUsMy41LDUuNywzLjUsOS42cy0xLjIsNi45LTMuNiw5LjVjLTIuNCwyLjUtNS4yLDMuOC04LjUsMy44cy0yLjgtLjMtNC4xLS44Yy0xLjMtLjUtMi41LTEuNC0zLjgtMi42djIuN2gtNi4zdi0zNS4yaDYuM1pNNjAzLjgsMzEzLjdjLTIsMC0zLjcuNy01LDIuMS0xLjMsMS40LTIsMy4yLTIsNS40cy43LDQuMSwyLDUuNWMxLjMsMS40LDMsMi4xLDUsMi4xczMuNi0uNyw0LjktMi4xYzEuMy0xLjQsMi0zLjIsMi01LjRzLS43LTQtMi01LjRjLTEuMy0xLjQtMy0yLjEtNC45LTIuMVoiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTY0MS42LDMwOC41aDYuNHYyNS40aC02LjR2LTIuN2MtMS4yLDEuMi0yLjUsMi0zLjcsMi42LTEuMy41LTIuNi44LTQuMS44LTMuMywwLTYuMS0xLjMtOC41LTMuOC0yLjQtMi41LTMuNi01LjctMy42LTkuNXMxLjItNy4xLDMuNS05LjZjMi4zLTIuNSw1LjEtMy44LDguNC0zLjhzMywuMyw0LjMuOSwyLjYsMS40LDMuNywyLjZ2LTIuOFpNNjM0LjksMzEzLjdjLTIsMC0zLjYuNy00LjksMi4xLTEuMywxLjQtMiwzLjItMiw1LjRzLjcsNCwyLDUuNGMxLjMsMS40LDMsMi4xLDQuOSwyLjFzMy43LS43LDUtMi4xYzEuMy0xLjQsMi0zLjIsMi01LjVzLS43LTQtMi01LjRjLTEuMy0xLjQtMy0yLjEtNS0yLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02NTQuMiwyOTguN2g2LjR2MzUuMmgtNi40di0zNS4yWiIvPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjgxLjQsMjk5LjZoNy43YzUsMCw4LjcuNiwxMS4xLDEuOSwyLjQsMS4yLDQuNCwzLjIsNiw2czIuNCw2LDIuNCw5LjgtLjQsNS4xLTEuMyw3LjNjLS45LDIuMi0yLjEsNC4xLTMuNiw1LjUtMS41LDEuNS0zLjIsMi41LTUsMy0xLjguNi00LjkuOC05LjQuOGgtNy45di0zNC4zWk02ODcuOSwzMDUuOXYyMS43aDNjMywwLDUuMi0uMyw2LjUtMSwxLjMtLjcsMi40LTEuOCwzLjMtMy41LjktMS42LDEuMy0zLjYsMS4zLTYsMC0zLjYtMS02LjUtMy4xLTguNS0xLjgtMS44LTQuOC0yLjctOC44LTIuN2gtMi4yWiIvPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNzE3LjEsMjk4YzEuMSwwLDIuMS40LDIuOSwxLjIuOC44LDEuMiwxLjgsMS4yLDIuOXMtLjQsMi4xLTEuMiwyLjljLS44LjgtMS43LDEuMi0yLjgsMS4ycy0yLjEtLjQtMi45LTEuMi0xLjItMS44LTEuMi0zLC40LTIuMSwxLjItMi45Yy44LS44LDEuNy0xLjIsMi45LTEuMlpNNzEzLjksMzA4LjVoNi40djI1LjRoLTYuNHYtMjUuNFoiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTc0NS40LDMwOC41aDYuNHYyMS44YzAsNC4zLS45LDcuNS0yLjYsOS41LTIuMywyLjctNS44LDQuMS0xMC41LDQuMXMtNC42LS4zLTYuMy0uOWMtMS43LS42LTMuMS0xLjUtNC4zLTIuN3MtMi0yLjctMi42LTQuNGg3Yy42LjcsMS40LDEuMywyLjQsMS42czIuMS41LDMuNS41LDMuMS0uMyw0LjEtLjhjMS0uNSwxLjgtMS4yLDIuMi0yLjEuNC0uOC42LTIuMy42LTQuMy0xLjEsMS4xLTIuMywxLjktMy41LDIuNC0xLjIuNS0yLjYuNy00LjIuNy0zLjQsMC02LjMtMS4yLTguNi0zLjctMi40LTIuNS0zLjUtNS42LTMuNS05LjNzMS4yLTcuMywzLjctOS43YzIuMy0yLjIsNC45LTMuMyw4LjEtMy4zczIuOC4zLDQuMS44YzEuMy41LDIuNiwxLjQsMy45LDIuN3YtMi44Wk03MzguOCwzMTMuOGMtMiwwLTMuNy43LTUsMi0xLjMsMS4zLTIsMy0yLDUuMXMuNywzLjksMiw1LjJjMS4zLDEuNCwzLDIsNSwyczMuNi0uNyw0LjktMmMxLjMtMS4zLDEuOS0zLjEsMS45LTUuMnMtLjYtMy44LTEuOS01LjJjLTEuMy0xLjMtMy0yLTUtMloiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTc2MS4xLDI5OGMxLjEsMCwyLjEuNCwyLjksMS4yLjguOCwxLjIsMS44LDEuMiwyLjlzLS40LDIuMS0xLjIsMi45Yy0uOC44LTEuNywxLjItMi44LDEuMnMtMi4xLS40LTIuOS0xLjItMS4yLTEuOC0xLjItMywuNC0yLjEsMS4yLTIuOWMuOC0uOCwxLjctMS4yLDIuOS0xLjJaTTc1Ny45LDMwOC41aDYuNHYyNS40aC02LjR2LTI1LjRaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik03NzEuMywyOTkuMWg2LjR2OS40aDMuOHY1LjVoLTMuOHYxOS45aC02LjR2LTE5LjloLTMuM3YtNS41aDMuM3YtOS40WiIvPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNODA0LjEsMzA4LjVoNi40djI1LjRoLTYuNHYtMi43Yy0xLjIsMS4yLTIuNSwyLTMuNywyLjYtMS4zLjUtMi42LjgtNC4xLjgtMy4zLDAtNi4xLTEuMy04LjUtMy44LTIuNC0yLjUtMy42LTUuNy0zLjYtOS41czEuMi03LjEsMy41LTkuNmMyLjMtMi41LDUuMS0zLjgsOC40LTMuOHMzLC4zLDQuMy45LDIuNiwxLjQsMy43LDIuNnYtMi44Wk03OTcuNCwzMTMuN2MtMiwwLTMuNi43LTQuOSwyLjEtMS4zLDEuNC0yLDMuMi0yLDUuNHMuNyw0LDIsNS40YzEuMywxLjQsMywyLjEsNC45LDIuMXMzLjctLjcsNS0yLjFjMS4zLTEuNCwyLTMuMiwyLTUuNXMtLjctNC0yLTUuNGMtMS4zLTEuNC0zLTIuMS01LTIuMVoiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTgxNi43LDI5OC43aDYuNHYzNS4yaC02LjR2LTM1LjJaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik04NDYsMjk5LjZoMTd2Ni40aC0xMC42djYuMmgxMC42djYuM2gtMTAuNnYxNS41aC02LjV2LTM0LjNaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik04NzguNiwzMDcuOGMyLjQsMCw0LjYuNiw2LjgsMS44LDIuMSwxLjIsMy44LDIuOCw0LjksNC45LDEuMiwyLjEsMS44LDQuMywxLjgsNi43cy0uNiw0LjYtMS44LDYuN2MtMS4yLDIuMS0yLjgsMy43LTQuOSw0LjktMi4xLDEuMi00LjMsMS44LTYuOCwxLjgtMy42LDAtNi44LTEuMy05LjMtMy45LTIuNi0yLjYtMy45LTUuNy0zLjktOS40czEuNS03LjMsNC40LTkuOWMyLjYtMi4zLDUuNS0zLjUsOC44LTMuNVpNODc4LjcsMzEzLjhjLTIsMC0zLjYuNy00LjksMi4xcy0yLDMuMS0yLDUuMy43LDQsMiw1LjRjMS4zLDEuNCwzLDIuMSw0LjksMi4xczMuNy0uNyw1LTIuMWMxLjMtMS40LDItMy4yLDItNS4zcy0uNy0zLjktMi01LjNjLTEuMy0xLjQtMy0yLTUtMloiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTg5Ni4yLDMwOC41aDUuNXYzLjJjLjYtMS4zLDEuNC0yLjIsMi40LTIuOXMyLjEtMSwzLjItMSwxLjcuMiwyLjYuN2wtMiw1LjVjLS43LS40LTEuNC0uNi0xLjgtLjYtMSwwLTEuOC42LTIuNSwxLjgtLjcsMS4yLTEsMy42LTEsNy4xdjEuMnMwLDEwLjMsMCwxMC4zaC02LjN2LTI1LjRaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05MTAuNywzMDguNWg2LjJsNS4xLDE0LjUsNS41LTE0LjVoMy44bDUuNCwxNC4zLDUuMS0xNC4zaDYuM2wtOS4zLDI1LjRoLTRsLTUuNC0xNC41LTUuNiwxNC41aC00bC05LjItMjUuNFoiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTk3MSwzMDguNWg2LjR2MjUuNGgtNi40di0yLjdjLTEuMiwxLjItMi41LDItMy43LDIuNi0xLjMuNS0yLjYuOC00LjEuOC0zLjMsMC02LjEtMS4zLTguNS0zLjgtMi40LTIuNS0zLjYtNS43LTMuNi05LjVzMS4yLTcuMSwzLjUtOS42YzIuMy0yLjUsNS4xLTMuOCw4LjQtMy44czMsLjMsNC4zLjksMi42LDEuNCwzLjcsMi42di0yLjhaTTk2NC4zLDMxMy43Yy0yLDAtMy42LjctNC45LDIuMS0xLjMsMS40LTIsMy4yLTIsNS40cy43LDQsMiw1LjRjMS4zLDEuNCwzLDIuMSw0LjksMi4xczMuNy0uNyw1LTIuMWMxLjMtMS40LDItMy4yLDItNS41cy0uNy00LTItNS40Yy0xLjMtMS40LTMtMi4xLTUtMi4xWiIvPgogICAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNOTgyLjgsMzA4LjVoNS41djMuMmMuNi0xLjMsMS40LTIuMiwyLjQtMi45czIuMS0xLDMuMi0xLDEuNy4yLDIuNi43bC0yLDUuNWMtLjctLjQtMS40LS42LTEuOC0uNi0xLDAtMS44LjYtMi41LDEuOC0uNywxLjItMSwzLjYtMSw3LjF2MS4yczAsMTAuMywwLDEwLjNoLTYuM3YtMjUuNFoiLz4KICAgICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTEwMTguOCwyOTguN2g2LjR2MzUuMmgtNi40di0yLjdjLTEuMiwxLjItMi41LDItMy43LDIuNi0xLjMuNS0yLjYuOC00LjEuOC0zLjMsMC02LjEtMS4zLTguNS0zLjgtMi40LTIuNS0zLjYtNS43LTMuNi05LjVzMS4yLTcuMSwzLjUtOS42YzIuMy0yLjUsNS4xLTMuOCw4LjQtMy44czMsLjMsNC4zLjksMi42LDEuNCwzLjcsMi42di0xMi42Wk0xMDEyLjEsMzEzLjdjLTIsMC0zLjYuNy00LjksMi4xLTEuMywxLjQtMiwzLjItMiw1LjRzLjcsNCwyLDUuNGMxLjMsMS40LDMsMi4xLDQuOSwyLjFzMy43LS43LDUtMi4xYzEuMy0xLjQsMi0zLjIsMi01LjVzLS43LTQtMi01LjRjLTEuMy0xLjQtMy0yLjEtNS0yLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMDM0LjYsMjk4YzEuMSwwLDIuMS40LDIuOSwxLjIuOC44LDEuMiwxLjgsMS4yLDIuOXMtLjQsMi4xLTEuMiwyLjljLS44LjgtMS43LDEuMi0yLjgsMS4ycy0yLjEtLjQtMi45LTEuMi0xLjItMS44LTEuMi0zLC40LTIuMSwxLjItMi45Yy44LS44LDEuNy0xLjIsMi45LTEuMlpNMTAzMS40LDMwOC41aDYuNHYyNS40aC02LjR2LTI1LjRaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMDQ0LDMwOC41aDYuNHYyLjZjMS40LTEuMiwyLjgtMi4xLDMuOS0yLjUsMS4yLS41LDIuNC0uNywzLjYtLjcsMi41LDAsNC43LjksNi40LDIuNiwxLjUsMS41LDIuMiwzLjcsMi4yLDYuNnYxNi44aC02LjN2LTExLjFjMC0zLS4xLTUtLjQtNi0uMy0xLS43LTEuOC0xLjQtMi4zLS43LS41LTEuNS0uOC0yLjUtLjhzLTIuNC40LTMuMywxLjNjLS45LjktMS42LDIuMS0xLjksMy42LS4yLjgtLjMsMi41LS4zLDUuMnYxMC4yaC02LjR2LTI1LjRaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMDkyLDMwOC41aDYuNHYyMS44YzAsNC4zLS45LDcuNS0yLjYsOS41LTIuMywyLjctNS44LDQuMS0xMC41LDQuMXMtNC42LS4zLTYuMy0uOWMtMS43LS42LTMuMS0xLjUtNC4zLTIuN3MtMi0yLjctMi42LTQuNGg3Yy42LjcsMS40LDEuMywyLjQsMS42czIuMS41LDMuNS41LDMuMS0uMyw0LjEtLjhjMS0uNSwxLjgtMS4yLDIuMi0yLjEuNC0uOC42LTIuMy42LTQuMy0xLjEsMS4xLTIuMywxLjktMy41LDIuNC0xLjIuNS0yLjYuNy00LjIuNy0zLjQsMC02LjMtMS4yLTguNi0zLjctMi40LTIuNS0zLjUtNS42LTMuNS05LjNzMS4yLTcuMywzLjctOS43YzIuMy0yLjIsNC45LTMuMyw4LjEtMy4zczIuOC4zLDQuMS44YzEuMy41LDIuNiwxLjQsMy45LDIuN3YtMi44Wk0xMDg1LjMsMzEzLjhjLTIsMC0zLjcuNy01LDItMS4zLDEuMy0yLDMtMiw1LjFzLjcsMy45LDIsNS4yYzEuMywxLjQsMywyLDUsMnMzLjYtLjcsNC45LTJjMS4zLTEuMywxLjktMy4xLDEuOS01LjJzLS42LTMuOC0xLjktNS4yYy0xLjMtMS4zLTMtMi01LTJaIi8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4=">
+      <div>
+        <h1>Partner in our <em>Digital</em> Network</h1>
+        <p class="lede">Tell us where you operate and which modes you move. Our partnerships team reads every submission.</p>
+      </div>
+      
+    </div>
+  </aside>
+
+  <main id="main">
+    <form id="f" novalidate>
+      <fieldset>
+        <legend><span class="n">1/4</span>Your company</legend>
+        <div class="card-up" id="cardup">
+          <input id="cardfile" type="file" accept="image/*" hidden>
+          <button type="button" class="btn2" id="cardbtn">Upload your card</button>
+          <span class="hint" id="cardmsg">Optional. We read your business card and fill in the details below.</span>
+          <div class="cardprev" id="cardprev" hidden><img id="cardimg" alt="Your business card"><button type="button" class="btn2" id="cardrm">Remove</button></div>
+        </div>
+        <label for="company">Company name <span class="req">*</span>
+          <input id="company" name="company" type="text" autocomplete="organization" required>
+          <span class="err" id="company-e" role="alert"></span></label>
+        <div class="row">
+          <label for="hq">Headquarters country <span class="req">*</span>
+            <select id="hq" name="hq" required><option value="">Select…</option></select>
+            <span class="err" id="hq-e" role="alert"></span></label>
+          <label for="web">Website
+            <input id="web" name="web" type="url" inputmode="url" placeholder="https://" autocomplete="url"></label>
+        </div>
+        <label for="details">Company details
+          <textarea id="details" name="details" placeholder="Years in business, services, depots or gateways, certifications, systems you work in"></textarea></label>
+        <div class="lbl" id="tms-l">Current TMS</div>
+        <div class="pills" role="group" aria-labelledby="tms-l">
+          <label class="tog"><input type="checkbox" name="tms" value="Cargowise"><span>Cargowise</span></label>
+          <label class="tog"><input type="checkbox" name="tms" value="Scope"><span>Scope</span></label>
+          <label class="tog"><input type="checkbox" name="tms" value="Magaya"><span>Magaya</span></label>
+          <label class="tog"><input type="checkbox" name="tms" value="Freightoscope"><span>Freightoscope</span></label>
+          <label class="tog"><input type="checkbox" name="tms" value="Custom Built"><span>Custom Built</span></label>
+          <label class="tog"><input type="checkbox" name="tms" value="Other" id="tms-other"><span>Other</span></label>
+        </div>
+        <input id="tms-text" type="text" placeholder="Which TMS?" aria-label="Other TMS name" hidden>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n">2/4</span>Your contact</legend>
+        <div class="row">
+          <label for="name">Full name <span class="req">*</span>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+            <span class="err" id="name-e" role="alert"></span></label>
+          <label for="title">Job title <span class="req">*</span>
+            <input id="title" name="title" type="text" autocomplete="organization-title" required>
+            <span class="err" id="title-e" role="alert"></span></label>
+        </div>
+        <div class="row">
+          <label for="email">Email <span class="req">*</span>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+            <span class="err" id="email-e" role="alert"></span></label>
+          <label for="phone">Phone or WhatsApp
+            <input id="phone" name="phone" type="tel" autocomplete="tel"></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n">3/4</span>Markets of interest</legend>
+        <div class="lbl" id="mk-l">Countries <span class="req">*</span> <span class="count" id="mk-n"></span></div>
+        <div class="ms" id="ms">
+          <input id="mk" type="text" role="combobox" aria-expanded="false" aria-controls="mk-list" aria-labelledby="mk-l" autocomplete="off" placeholder="Search a country or code, then pick as many as you need">
+          <div class="list" id="mk-list" role="listbox" aria-multiselectable="true" hidden></div>
+          <div class="chips" id="chips" aria-label="Selected countries"></div>
+        </div>
+        <span class="err" id="mk-e" role="alert"></span>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="n">4/4</span>Operating Modes you can support ExFreight with</legend>
+        <div class="lbl" id="md-l">Tick every combination you handle <span class="req">*</span></div>
+        <div class="mx" role="group" aria-labelledby="md-l">
+          <span></span><span class="h">First mile</span><span class="h">Final mile</span>
+          <span class="m">AIR</span>
+          <label class="tog"><input type="checkbox" name="mode" value="AIR-FIRST" id="md-air" aria-label="Air, first mile"><span>First</span></label>
+          <label class="tog"><input type="checkbox" name="mode" value="AIR-FINAL" aria-label="Air, final mile"><span>Final</span></label>
+          <span class="m">LCL</span>
+          <label class="tog"><input type="checkbox" name="mode" value="LCL-FIRST" aria-label="LCL, first mile"><span>First</span></label>
+          <label class="tog"><input type="checkbox" name="mode" value="LCL-FINAL" aria-label="LCL, final mile"><span>Final</span></label>
+          <span class="m">FCL</span>
+          <label class="tog"><input type="checkbox" name="mode" value="FCL-FIRST" aria-label="FCL, first mile"><span>First</span></label>
+          <label class="tog"><input type="checkbox" name="mode" value="FCL-FINAL" aria-label="FCL, final mile"><span>Final</span></label>
+        </div>
+        <span class="err" id="md-e" role="alert"></span>
+        <div class="lbl" id="iata-wrap" hidden>
+          <span id="iata-l">Are you IATA certified? <span class="req">*</span></span>
+          <div class="yn" role="radiogroup" aria-labelledby="iata-l">
+            <label class="tog"><input type="radio" name="iata" value="yes"><span>Yes</span></label>
+            <label class="tog"><input type="radio" name="iata" value="no"><span>No</span></label>
+          </div>
+          <span class="err" id="iata-e" role="alert"></span>
+        </div>
+        <div class="lbl" id="fmc-wrap" hidden>
+          <span id="fmc-l">Are you FMC certified and able to issue a HBL? <span class="req">*</span></span>
+          <div class="yn" role="radiogroup" aria-labelledby="fmc-l">
+            <label class="tog"><input type="radio" name="fmc" value="yes"><span>Yes</span></label>
+            <label class="tog"><input type="radio" name="fmc" value="no"><span>No</span></label>
+          </div>
+          <span class="err" id="fmc-e" role="alert"></span>
+        </div>
+        <div class="lbl" id="cons-wrap" hidden>
+          <span id="cons-l">Do you control your own consolidation box? <span class="req">*</span></span>
+          <div class="yn" role="radiogroup" aria-labelledby="cons-l">
+            <label class="tog"><input type="radio" name="cons" value="yes"><span>Yes</span></label>
+            <label class="tog"><input type="radio" name="cons" value="no"><span>No</span></label>
+          </div>
+          <span class="err" id="cons-e" role="alert"></span>
+        </div>
+        <div class="lbl" id="lanes-wrap" hidden>
+          <span id="ln-l">Trade lanes served <span class="req">*</span> <span class="count" id="ln-n"></span></span>
+          <div class="ms" id="ln-ms">
+            <input id="ln" type="text" role="combobox" aria-expanded="false" aria-controls="ln-list" aria-labelledby="ln-l" autocomplete="off" placeholder="Search a country, then pick as many as you need">
+            <div class="list" id="ln-list" role="listbox" aria-multiselectable="true" hidden></div>
+            <div class="chips" id="ln-chips" aria-label="Selected trade lanes"></div>
+          </div>
+          <span class="err" id="ln-e" role="alert"></span>
+        </div>
+        <div class="lbl" id="cb-wrap" hidden>
+          <span id="cb-l">Are you a licensed customs broker? <span class="req">*</span></span>
+          <div class="yn" role="radiogroup" aria-labelledby="cb-l">
+            <label class="tog"><input type="radio" name="cb" value="yes"><span>Yes</span></label>
+            <label class="tog"><input type="radio" name="cb" value="no"><span>No</span></label>
+          </div>
+          <span class="err" id="cb-e" role="alert"></span>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <label class="demo" for="demo"><input id="demo" name="demo" type="checkbox"><span><b>I'd like a DEMO of ExFresso and the ExFreight Partner Portal</b><small>Tick this and the ExFreight team will contact you to arrange one.</small></span></label>
+      </fieldset>
+
+      <div class="actions">
+        <button class="go" id="go" type="submit">Submit my interest</button>
+        <p class="fine">By submitting you agree ExFreight may contact you about joining its partner network.</p>
+      </div>
+    </form>
+  </main>
+</div>
+
+<script>
+window.claude={use:async n=>n==='sample'?{
+  limits:async()=>({images:true}),
+  json:async(p,o)=>{
+    const b=o&&o.images&&o.images[0];
+    const image=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(b)});
+    const r=await fetch('/api/public/card',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image})});
+    if(!r.ok)throw new Error('read');
+    return r.json();
+  }}:null};
+const COUNTRIES = [["Afghanistan", "AF"], ["Albania", "AL"], ["Algeria", "DZ"], ["American Samoa", "AS"], ["Andorra", "AD"], ["Angola", "AO"], ["Anguilla", "AI"], ["Antarctica", "AQ"], ["Antigua and Barbuda", "AG"], ["Argentina", "AR"], ["Armenia", "AM"], ["Aruba", "AW"], ["Australia", "AU"], ["Austria", "AT"], ["Azerbaijan", "AZ"], ["Bahamas", "BS"], ["Bahrain", "BH"], ["Bangladesh", "BD"], ["Barbados", "BB"], ["Belarus", "BY"], ["Belgium", "BE"], ["Belize", "BZ"], ["Benin", "BJ"], ["Bermuda", "BM"], ["Bhutan", "BT"], ["Bolivia", "BO"], ["Bonaire, Sint Eustatius and Saba", "BQ"], ["Bosnia and Herzegovina", "BA"], ["Botswana", "BW"], ["Bouvet Island", "BV"], ["Brazil", "BR"], ["British Indian Ocean Territory", "IO"], ["Brunei Darussalam", "BN"], ["Bulgaria", "BG"], ["Burkina Faso", "BF"], ["Burundi", "BI"], ["Cabo Verde", "CV"], ["Cambodia", "KH"], ["Cameroon", "CM"], ["Canada", "CA"], ["Cayman Islands", "KY"], ["Central African Republic", "CF"], ["Chad", "TD"], ["Chile", "CL"], ["China", "CN"], ["Christmas Island", "CX"], ["Cocos (Keeling) Islands", "CC"], ["Colombia", "CO"], ["Comoros", "KM"], ["Congo", "CG"], ["Congo, The Democratic Republic of the", "CD"], ["Cook Islands", "CK"], ["Costa Rica", "CR"], ["Croatia", "HR"], ["Cuba", "CU"], ["Curaçao", "CW"], ["Cyprus", "CY"], ["Czechia", "CZ"], ["Côte d'Ivoire", "CI"], ["Denmark", "DK"], ["Djibouti", "DJ"], ["Dominica", "DM"], ["Dominican Republic", "DO"], ["Ecuador", "EC"], ["Egypt", "EG"], ["El Salvador", "SV"], ["Equatorial Guinea", "GQ"], ["Eritrea", "ER"], ["Estonia", "EE"], ["Eswatini", "SZ"], ["Ethiopia", "ET"], ["Falkland Islands (Malvinas)", "FK"], ["Faroe Islands", "FO"], ["Fiji", "FJ"], ["Finland", "FI"], ["France", "FR"], ["French Guiana", "GF"], ["French Polynesia", "PF"], ["French Southern Territories", "TF"], ["Gabon", "GA"], ["Gambia", "GM"], ["Georgia", "GE"], ["Germany", "DE"], ["Ghana", "GH"], ["Gibraltar", "GI"], ["Greece", "GR"], ["Greenland", "GL"], ["Grenada", "GD"], ["Guadeloupe", "GP"], ["Guam", "GU"], ["Guatemala", "GT"], ["Guernsey", "GG"], ["Guinea", "GN"], ["Guinea-Bissau", "GW"], ["Guyana", "GY"], ["Haiti", "HT"], ["Heard Island and McDonald Islands", "HM"], ["Holy See (Vatican City State)", "VA"], ["Honduras", "HN"], ["Hong Kong", "HK"], ["Hungary", "HU"], ["Iceland", "IS"], ["India", "IN"], ["Indonesia", "ID"], ["Iran", "IR"], ["Iraq", "IQ"], ["Ireland", "IE"], ["Isle of Man", "IM"], ["Israel", "IL"], ["Italy", "IT"], ["Jamaica", "JM"], ["Japan", "JP"], ["Jersey", "JE"], ["Jordan", "JO"], ["Kazakhstan", "KZ"], ["Kenya", "KE"], ["Kiribati", "KI"], ["Kuwait", "KW"], ["Kyrgyzstan", "KG"], ["Laos", "LA"], ["Latvia", "LV"], ["Lebanon", "LB"], ["Lesotho", "LS"], ["Liberia", "LR"], ["Libya", "LY"], ["Liechtenstein", "LI"], ["Lithuania", "LT"], ["Luxembourg", "LU"], ["Macao", "MO"], ["Madagascar", "MG"], ["Malawi", "MW"], ["Malaysia", "MY"], ["Maldives", "MV"], ["Mali", "ML"], ["Malta", "MT"], ["Marshall Islands", "MH"], ["Martinique", "MQ"], ["Mauritania", "MR"], ["Mauritius", "MU"], ["Mayotte", "YT"], ["Mexico", "MX"], ["Micronesia, Federated States of", "FM"], ["Moldova", "MD"], ["Monaco", "MC"], ["Mongolia", "MN"], ["Montenegro", "ME"], ["Montserrat", "MS"], ["Morocco", "MA"], ["Mozambique", "MZ"], ["Myanmar", "MM"], ["Namibia", "NA"], ["Nauru", "NR"], ["Nepal", "NP"], ["Netherlands", "NL"], ["New Caledonia", "NC"], ["New Zealand", "NZ"], ["Nicaragua", "NI"], ["Niger", "NE"], ["Nigeria", "NG"], ["Niue", "NU"], ["Norfolk Island", "NF"], ["North Korea", "KP"], ["North Macedonia", "MK"], ["Northern Mariana Islands", "MP"], ["Norway", "NO"], ["Oman", "OM"], ["Pakistan", "PK"], ["Palau", "PW"], ["Palestine, State of", "PS"], ["Panama", "PA"], ["Papua New Guinea", "PG"], ["Paraguay", "PY"], ["Peru", "PE"], ["Philippines", "PH"], ["Pitcairn", "PN"], ["Poland", "PL"], ["Portugal", "PT"], ["Puerto Rico", "PR"], ["Qatar", "QA"], ["Romania", "RO"], ["Russian Federation", "RU"], ["Rwanda", "RW"], ["Réunion", "RE"], ["Saint Barthélemy", "BL"], ["Saint Helena, Ascension and Tristan da Cunha", "SH"], ["Saint Kitts and Nevis", "KN"], ["Saint Lucia", "LC"], ["Saint Martin (French part)", "MF"], ["Saint Pierre and Miquelon", "PM"], ["Saint Vincent and the Grenadines", "VC"], ["Samoa", "WS"], ["San Marino", "SM"], ["Sao Tome and Principe", "ST"], ["Saudi Arabia", "SA"], ["Senegal", "SN"], ["Serbia", "RS"], ["Seychelles", "SC"], ["Sierra Leone", "SL"], ["Singapore", "SG"], ["Sint Maarten (Dutch part)", "SX"], ["Slovakia", "SK"], ["Slovenia", "SI"], ["Solomon Islands", "SB"], ["Somalia", "SO"], ["South Africa", "ZA"], ["South Georgia and the South Sandwich Islands", "GS"], ["South Korea", "KR"], ["South Sudan", "SS"], ["Spain", "ES"], ["Sri Lanka", "LK"], ["Sudan", "SD"], ["Suriname", "SR"], ["Svalbard and Jan Mayen", "SJ"], ["Sweden", "SE"], ["Switzerland", "CH"], ["Syria", "SY"], ["Taiwan", "TW"], ["Tajikistan", "TJ"], ["Tanzania", "TZ"], ["Thailand", "TH"], ["Timor-Leste", "TL"], ["Togo", "TG"], ["Tokelau", "TK"], ["Tonga", "TO"], ["Trinidad and Tobago", "TT"], ["Tunisia", "TN"], ["Turkmenistan", "TM"], ["Turks and Caicos Islands", "TC"], ["Tuvalu", "TV"], ["Türkiye", "TR"], ["Uganda", "UG"], ["Ukraine", "UA"], ["United Arab Emirates", "AE"], ["United Kingdom", "GB"], ["United States", "US"], ["United States Minor Outlying Islands", "UM"], ["Uruguay", "UY"], ["Uzbekistan", "UZ"], ["Vanuatu", "VU"], ["Venezuela", "VE"], ["Vietnam", "VN"], ["Virgin Islands, British", "VG"], ["Virgin Islands, U.S.", "VI"], ["Wallis and Futuna", "WF"], ["Western Sahara", "EH"], ["Yemen", "YE"], ["Zambia", "ZM"], ["Zimbabwe", "ZW"], ["Åland Islands", "AX"]];
+const MODE_LABEL = {"AIR-FIRST":"Air first mile","AIR-FINAL":"Air final mile","LCL-FIRST":"LCL first mile","LCL-FINAL":"LCL final mile","FCL-FIRST":"FCL first mile","FCL-FINAL":"FCL final mile"};
+const $ = id => document.getElementById(id);
+const byCode = Object.fromEntries(COUNTRIES.map(c=>[c[1],c[0]]));
+const selected = new Set();
+
+// HQ select
+COUNTRIES.forEach(([n,c])=>{const o=document.createElement('option');o.value=c;o.textContent=n+' ('+c+')';$('hq').appendChild(o)});
+
+// Country multiselect
+const mk=$('mk'), list=$('mk-list'); let hl=-1, shown=[];
+function norm(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}
+function renderList(){
+  const q=norm(mk.value.trim());
+  shown=COUNTRIES.filter(([n,c])=>!q||norm(n).includes(q)||c.toLowerCase().startsWith(q));
+  list.textContent='';
+  if(!shown.length){const d=document.createElement('div');d.className='none';d.textContent='No match. Try the two-letter code.';list.appendChild(d);return}
+  shown.forEach(([n,c],i)=>{
+    const d=document.createElement('div');d.className='opt'+(i===hl?' hl':'');d.setAttribute('role','option');
+    d.setAttribute('aria-selected',selected.has(c));d.dataset.c=c;d.id='o-'+c;
+    const s=document.createElement('span');s.textContent=n;const k=document.createElement('code');k.textContent=c;
+    d.append(s,k);list.appendChild(d)});
+}
+function openList(){list.hidden=false;mk.setAttribute('aria-expanded','true');renderList()}
+function closeList(){list.hidden=true;mk.setAttribute('aria-expanded','false');hl=-1}
+function toggle(c){selected.has(c)?selected.delete(c):selected.add(c);renderChips();if(!list.hidden)renderList();if(selected.size)$('mk-e').textContent=''}
+function renderChips(){
+  const box=$('chips');box.textContent='';
+  [...selected].sort((a,b)=>byCode[a].localeCompare(byCode[b])).forEach(c=>{
+    const s=document.createElement('span');s.className='chip';
+    const t=document.createElement('span');t.textContent=byCode[c];const b=document.createElement('b');b.textContent=c;
+    const x=document.createElement('button');x.type='button';x.textContent='×';x.setAttribute('aria-label','Remove '+byCode[c]);
+    x.addEventListener('click',()=>toggle(c));
+    s.append(t,b,x);box.appendChild(s)});
+  $('mk-n').textContent=selected.size?selected.size+' selected':'';
+}
+mk.addEventListener('focus',openList);
+mk.addEventListener('input',()=>{hl=0;openList()});
+mk.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'){e.preventDefault();if(list.hidden)openList();hl=Math.min(hl+1,shown.length-1);renderList();scrollHl()}
+  else if(e.key==='ArrowUp'){e.preventDefault();hl=Math.max(hl-1,0);renderList();scrollHl()}
+  else if(e.key==='Enter'){if(!list.hidden&&shown.length){e.preventDefault();toggle(shown[Math.max(hl,0)][1])}}
+  else if(e.key==='Escape'){closeList()}
+});
+function scrollHl(){const el=list.querySelector('.hl');if(el)el.scrollIntoView({block:'nearest'})}
+list.addEventListener('mousedown',e=>{e.preventDefault();const o=e.target.closest('.opt');if(o)toggle(o.dataset.c)});
+document.addEventListener('click',e=>{if(!$('ms').contains(e.target))closeList()});
+mk.addEventListener('blur',()=>setTimeout(()=>{if(document.activeElement!==mk)closeList()},120));
+
+// validation + submit
+function setErr(id,msg,fieldId){$(id).textContent=msg;const f=fieldId&&$(fieldId);if(f){msg?f.setAttribute('aria-invalid','true'):f.removeAttribute('aria-invalid')}return !msg}
+function validate(){
+  let ok=true,first=null;
+  const chk=(cond,eid,msg,fid)=>{const good=setErr(eid,cond?'':msg,fid);if(!good&&!first)first=fid||eid;ok=ok&&good};
+  chk($('company').value.trim(),'company-e','Enter your company name.','company');
+  chk($('hq').value,'hq-e','Choose the country where you are headquartered.','hq');
+  chk($('name').value.trim(),'name-e','Enter your full name.','name');
+  chk($('title').value.trim(),'title-e','Enter your job title.','title');
+  chk(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('email').value.trim()),'email-e','Enter a valid email address, like name@company.com.','email');
+  chk(selected.size>0,'mk-e','Pick at least one country.','mk');
+  chk(document.querySelectorAll('input[name=mode]:checked').length>0,'md-e','Tick at least one mode.',null);
+  const mode=v=>document.querySelector('input[name=mode][value="'+v+'"]').checked;
+  const needFmc=['LCL-FIRST','FCL-FIRST'].some(mode),needCons=['LCL-FIRST'].some(mode),needCb=['AIR-FINAL','LCL-FINAL','FCL-FINAL'].some(mode);
+  chk(!needFmc||document.querySelector('input[name=fmc]:checked'),'fmc-e','Please answer yes or no.',null);
+  chk(!needCons||document.querySelector('input[name=cons]:checked'),'cons-e','Please answer yes or no.',null);
+  chk(!needCons||(document.querySelector('input[name=cons]:checked')||{}).value!=='yes'||lanes.size>0,'ln-e','Pick at least one country.','ln');
+  chk(!needCb||document.querySelector('input[name=cb]:checked'),'cb-e','Please answer yes or no.',null);
+  chk(!$('md-air')||!$('md-air').checked||document.querySelector('input[name=iata]:checked'),'iata-e','Please answer yes or no.',null);
+  if(first&&$(first))$(first).focus();else if(first)document.querySelector('input[name=mode]').focus();
+  return ok;
+}
+function ans(n){const el=document.querySelector('input[name='+n+']:checked');return el&&!el.closest('[hidden]')?el.value:''}
+function record(){
+  const modes=[...document.querySelectorAll('input[name=mode]:checked')].map(i=>i.value);
+  return {company:$('company').value.trim(),hqCountry:$('hq').value,website:$('web').value.trim(),details:$('details').value.trim(),
+    contactName:$('name').value.trim(),jobTitle:$('title').value.trim(),email:$('email').value.trim(),phone:$('phone').value.trim(),
+    markets:[...selected].sort(),modes,tms:[...document.querySelectorAll('input[name=tms]:checked')].map(i=>i.value),tmsOther:$('tms-other').checked?$('tms-text').value.trim():'',iataCertified:($('md-air').checked&&document.querySelector('input[name=iata]:checked')||{}).value||'',fmcHbl:ans('fmc'),ownConsolBox:ans('cons'),tradeLanes:ans('cons')==='yes'?[...lanes].sort():[],customsBroker:ans('cb'),hqName:byCode[$('hq').value]||'',marketNames:[...selected].map(c=>byCode[c]),laneNames:[...lanes].map(c=>byCode[c]),wantsDemo:$('demo').checked,cardImage:cardData,submittedAt:new Date().toISOString(),status:'new'};
+}
+function summary(r){
+  return ['ExFreight partner interest','',
+   'Company: '+r.company,'HQ: '+byCode[r.hqCountry]+' ('+r.hqCountry+')','Website: '+(r.website||'-'),
+   'Details: '+(r.details||'-'),'',
+   'Contact: '+r.contactName+', '+r.jobTitle,'Email: '+r.email,'Phone: '+(r.phone||'-'),'',
+   'Markets: '+r.markets.map(c=>byCode[c]+' ('+c+')').join(', '),
+   'Modes: '+r.modes.map(m=>MODE_LABEL[m]).join(', '),'IATA certified: '+(r.iataCertified||'-'),'FMC certified, can issue HBL: '+(r.fmcHbl||'-'),'Own consolidation box: '+(r.ownConsolBox||'-'),'Trade lanes: '+((r.tradeLanes||[]).map(c=>byCode[c]).join(', ')||'-'),'Licensed customs broker: '+(r.customsBroker||'-'),'Current TMS: '+((r.tms||[]).join(', ')+(r.tmsOther?' ('+r.tmsOther+')':'')||'-'),'','Demo requested: '+(r.wantsDemo?'YES':'No')].join('\n');
+}
+function showDone(r,saved){
+  const m=$('main');m.textContent='';
+  const d=document.createElement('div');d.className='done';
+  const h=document.createElement('h2');
+  if(saved){h.innerHTML='Thank <em>you</em>.';}else{h.textContent='One last step.'}
+  const p=document.createElement('p');
+  p.textContent=saved?'We received the interest of '+r.company+'.'+(r.wantsDemo?' We will contact you to arrange your demo.':'')+' Our partnerships team will be in touch at '+r.email+'.'
+    :'This page could not send your details directly. Copy the summary below and email it to the ExFreight contact who shared this link.';
+  d.append(h,p);
+  if(!saved){
+    const s=document.createElement('pre');s.className='sum';s.id='sum';s.textContent=summary(r);
+    const b=document.createElement('button');b.type='button';b.className='btn2';b.textContent='Copy summary';
+    b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(s.textContent);b.textContent='Copied'}catch(_){const g=document.createRange();g.selectNodeContents(s);const sel=getSelection();sel.removeAllRanges();sel.addRange(g);b.textContent='Selected. Press Ctrl+C'}});
+    d.append(s,b);
+  }
+  m.appendChild(d);window.scrollTo(0,0);
+}
+$('tms-other').addEventListener('change',()=>{$('tms-text').hidden=!$('tms-other').checked;if($('tms-other').checked)$('tms-text').focus()});
+function syncIata(){const on=$('md-air').checked;$('iata-wrap').hidden=!on;if(!on){document.querySelectorAll('input[name=iata]').forEach(i=>i.checked=false);$('iata-e').textContent=''}}
+$('md-air').addEventListener('change',syncIata);
+const lanes=new Set();
+function syncCond(){
+  const on=v=>document.querySelector('input[name=mode][value="'+v+'"]').checked;
+  const needFmc=['LCL-FIRST','FCL-FIRST'].some(on),needCons=['LCL-FIRST'].some(on),needCb=['AIR-FINAL','LCL-FINAL','FCL-FINAL'].some(on);
+  [['fmc',needFmc],['cons',needCons],['cb',needCb]].forEach(([k,n])=>{$(k+'-wrap').hidden=!n;if(!n){document.querySelectorAll('input[name='+k+']').forEach(i=>i.checked=false);$(k+'-e').textContent=''}});
+  const lanesOn=needCons&&(document.querySelector('input[name=cons]:checked')||{}).value==='yes';
+  $('lanes-wrap').hidden=!lanesOn;if(!lanesOn){lanes.clear();renderLn();$('ln-e').textContent=''}
+}
+document.querySelectorAll('input[name=mode],input[name=cons]').forEach(i=>i.addEventListener('change',syncCond));
+['fmc','cons','cb'].forEach(k=>document.querySelectorAll('input[name='+k+']').forEach(i=>i.addEventListener('change',()=>{$(k+'-e').textContent=''})));
+// trade lanes multi-select
+const ln=$('ln'),lnList=$('ln-list');let lnHl=-1,lnShown=[];
+function renderLnList(){
+  const q=norm(ln.value.trim());
+  lnShown=COUNTRIES.filter(([n,c])=>!q||norm(n).includes(q)||c.toLowerCase().startsWith(q));
+  lnList.textContent='';
+  if(!lnShown.length){const d=document.createElement('div');d.className='none';d.textContent='No match. Try the two-letter code.';lnList.appendChild(d);return}
+  lnShown.forEach(([n,c],i)=>{const d=document.createElement('div');d.className='opt'+(i===lnHl?' hl':'');d.setAttribute('role','option');d.setAttribute('aria-selected',lanes.has(c));d.dataset.c=c;
+    const sp=document.createElement('span');sp.textContent=n;const k=document.createElement('code');k.textContent=c;d.append(sp,k);lnList.appendChild(d)});
+}
+function renderLn(){
+  const box=$('ln-chips');box.textContent='';
+  [...lanes].sort((a,b)=>byCode[a].localeCompare(byCode[b])).forEach(c=>{
+    const sp=document.createElement('span');sp.className='chip';const t=document.createElement('span');t.textContent=byCode[c];const b=document.createElement('b');b.textContent=c;
+    const x=document.createElement('button');x.type='button';x.textContent='×';x.setAttribute('aria-label','Remove '+byCode[c]);x.addEventListener('click',()=>lnToggle(c));
+    sp.append(t,b,x);box.appendChild(sp)});
+  $('ln-n').textContent=lanes.size?lanes.size+' selected':'';
+}
+function lnToggle(c){lanes.has(c)?lanes.delete(c):lanes.add(c);renderLn();if(!lnList.hidden)renderLnList();if(lanes.size)$('ln-e').textContent=''}
+function lnOpen(){lnList.hidden=false;ln.setAttribute('aria-expanded','true');renderLnList()}
+function lnClose(){lnList.hidden=true;ln.setAttribute('aria-expanded','false');lnHl=-1}
+ln.addEventListener('focus',lnOpen);
+ln.addEventListener('input',()=>{lnHl=0;lnOpen()});
+ln.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'){e.preventDefault();if(lnList.hidden)lnOpen();lnHl=Math.min(lnHl+1,lnShown.length-1);renderLnList()}
+  else if(e.key==='ArrowUp'){e.preventDefault();lnHl=Math.max(lnHl-1,0);renderLnList()}
+  else if(e.key==='Enter'){if(!lnList.hidden&&lnShown.length){e.preventDefault();lnToggle(lnShown[Math.max(lnHl,0)][1])}}
+  else if(e.key==='Escape')lnClose();
+});
+lnList.addEventListener('mousedown',e=>{e.preventDefault();const o=e.target.closest('.opt');if(o)lnToggle(o.dataset.c)});
+document.addEventListener('click',e=>{if(!$('ln-ms').contains(e.target))lnClose()});
+document.querySelectorAll('input[name=iata]').forEach(i=>i.addEventListener('change',()=>{$('iata-e').textContent=''}));
+// Upload your card: read it with Claude, fill the form, keep the image with the submission
+let cardData='';
+function shrink(file){return new Promise((res,rej)=>{
+  const im=new Image(),u=URL.createObjectURL(file);
+  im.onload=()=>{URL.revokeObjectURL(u);
+    let w=im.width,h=im.height,m=1100,k=Math.min(1,m/Math.max(w,h));w=Math.round(w*k);h=Math.round(h*k);
+    const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);
+    let q=.75,d=c.toDataURL('image/jpeg',q);
+    while(d.length>170000&&q>.35){q-=.1;d=c.toDataURL('image/jpeg',q)}
+    res(d)};
+  im.onerror=()=>rej(new Error('image'));im.src=u})}
+function dataToBlob(d){const [h,b]=d.split(',');const a=atob(b),n=new Uint8Array(a.length);for(let i=0;i<a.length;i++)n[i]=a.charCodeAt(i);return new Blob([n],{type:'image/jpeg'})}
+function fillFrom(x){
+  const set=(id,v)=>{if(v&&$(id)&&!$(id).value.trim())$(id).value=String(v).trim()};
+  set('company',x.company);set('web',x.website);set('name',x.name);set('title',x.title);set('email',x.email);set('phone',x.phone);
+  if(x.country&&!$('hq').value){const q=norm(String(x.country).trim());const m=COUNTRIES.find(([n,c])=>norm(n)===q||c.toLowerCase()===q)||COUNTRIES.find(([n])=>norm(n).includes(q)||q.includes(norm(n)));if(m)$('hq').value=m[1]}
+}
+$('cardbtn').addEventListener('click',()=>$('cardfile').click());
+$('cardrm').addEventListener('click',()=>{cardData='';$('cardprev').hidden=true;$('cardfile').value='';$('cardmsg').textContent='Optional. We read your business card and fill in the details below.'});
+$('cardfile').addEventListener('change',async()=>{
+  const f=$('cardfile').files[0];if(!f)return;
+  const msg=$('cardmsg');msg.textContent='Reading your card…';
+  try{cardData=await shrink(f)}catch(_){msg.textContent='Could not open that image. Try a photo or screenshot.';return}
+  $('cardimg').src=cardData;$('cardprev').hidden=false;
+  try{
+    const sample=await claude.use('sample');
+    if(!sample||!(await sample.limits()).images){msg.textContent='Card saved. Please fill in the details below.';return}
+    const x=await sample.json('Read this business card image. Return JSON with exactly these string keys: company, website, name, title, email, phone, country. Use an empty string for anything not printed on the card. Do not guess.',{images:[dataToBlob(cardData)],modelTier:'quick',cache:false});
+    fillFrom(x||{});msg.textContent='Card read. Please check the details below.';
+  }catch(_){msg.textContent='Card saved. Please fill in the details below.'}
+});
+
+// Prefill from a short link: /p/<code>
+(function(){
+  const m=location.pathname.match(/^\/p\/([a-z0-9]+)$/i);
+  if(!m)return;
+  fetch('/api/public/prefill/'+m[1]).then(r=>r.ok?r.json():{}).then(d=>{
+    const set=(id,v)=>{if(v&&$(id)&&!$(id).value.trim())$(id).value=String(v)};
+    set('company',d.c);set('web',d.w);set('name',d.n);set('title',d.t);set('email',d.e);set('phone',d.p);set('details',d.x);
+    if(d.k){const q=norm(String(d.k).trim());const mm=COUNTRIES.find(([n,c])=>norm(n)===q||c.toLowerCase()===q)||COUNTRIES.find(([n])=>norm(n).includes(q)||q.includes(norm(n)));if(mm&&!$('hq').value)$('hq').value=mm[1]}
+    if(d.c||d.n)setTimeout(()=>{const f=document.querySelectorAll('fieldset')[2];if(f)f.scrollIntoView({block:'start'})},300);
+  }).catch(()=>{});
+})();
+$('f').addEventListener('submit',async e=>{
+  e.preventDefault();if(!validate())return;
+  const r=record(),btn=$('go');btn.disabled=true;btn.textContent='Sending…';
+  let saved=false;
+  try{
+    const resp=await fetch('/api/public/partner',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(r)});
+    saved=resp.ok;
+  }catch(_){saved=false}
+  showDone(r,saved);
+});
+['company','hq','name','title','email'].forEach(id=>$(id).addEventListener('input',()=>setErr(id+'-e','',id)));
+document.querySelectorAll('input[name=mode]').forEach(i=>i.addEventListener('change',()=>{if(document.querySelector('input[name=mode]:checked'))$('md-e').textContent=''}));
+</script>
+
+</body></html>
